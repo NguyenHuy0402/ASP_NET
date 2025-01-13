@@ -13,10 +13,10 @@ namespace WebApplication1.Context
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ASP_NETEntities : DbContext
+    public partial class web_aspEntities : DbContext
     {
-        public ASP_NETEntities()
-            : base("name=ASP_NETEntities")
+        public web_aspEntities()
+            : base("name=web_aspEntities")
         {
         }
     
@@ -25,6 +25,11 @@ namespace WebApplication1.Context
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

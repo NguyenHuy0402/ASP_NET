@@ -4,8 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5bbe556a335d4800a6d9c384ebb6a275" Name="Diagram1">
-        <EntityTypeShape EntityType="ASP_NETModel.Product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="2c7626ec07264f91a52e7dbed4b76262" Name="Diagram1">
+        <EntityTypeShape EntityType="web_aspModel.Brand" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="web_aspModel.Category" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="web_aspModel.Order" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="web_aspModel.OrderDetail" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="web_aspModel.Product" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="web_aspModel.User" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="web_aspModel.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="web_aspModel.FK_OrderDetail_Product" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

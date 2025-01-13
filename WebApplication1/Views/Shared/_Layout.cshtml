@@ -54,15 +54,35 @@
                  </div> <!-- col.// -->
                  <div class="col-xl-4 col-lg-4 col-md-6">
                      <div class="widgets-wrap float-md-right">
-                         <div class="widget-header mr-3">
-                             <a href="#" class="widget-view">
-                                 <div class="icon-area">
-                                     <i class="fa fa-user"></i>
-                                     <span class="notify">3</span>
-                                 </div>
-                                 <small class="text"> My profile </small>
-                             </a>
-                         </div>
+                         <ul style="list-style-type: none; margin: 0; padding: 0; display: inline-block;">
+                             @if (Session["idUser"] != null)
+                             {
+                                 <li style="display: inline; margin-right: 15px;">
+                                     <a href="~/Admin/Product/Index" style="color: gray; text-decoration: none; font-weight: bold;">
+                                         Trang quản trị
+                                     </a>
+                                 </li>
+                                 <li style="display: inline;">
+                                     <a href="~/Home/Logout" style="color: gray; text-decoration: none; font-weight: bold;">
+                                         Logout
+                                     </a>
+                                 </li>
+                             }
+                             else
+                             {
+                                 <li style="display: inline; margin-right: 15px;">
+                                     <a href="~/Home/Register" style="color: gray; text-decoration: none; font-weight: bold;">
+                                         Sign up
+                                     </a>
+                                 </li>
+                                 <li style="display: inline;">
+                                     <a href="~/Home/Login" style="color: gray; text-decoration: none; font-weight: bold;">
+                                         Sign in
+                                     </a>
+                                 </li>
+                             }
+                         </ul>
+
                          <div class="widget-header mr-3">
                              <a href="#" class="widget-view">
                                  <div class="icon-area">
@@ -81,9 +101,10 @@
                              </a>
                          </div>
                          <div class="widget-header">
-                             <a href="@Url.Action("Cart", "Shopping")" class="widget-view">
+                             <a href="@Url.Action("Cart","Cart")" class="widget-view">
                                  <div class="icon-area">
                                      <i class="fa fa-shopping-cart"></i>
+                                     <span class="notify" id="CartCount">@Session["count"]</span>
                                  </div>
                                  <small class="text"> Cart </small>
                              </a>

@@ -14,20 +14,30 @@ namespace WebApplication1.Context
     
     public partial class Product
     {
-        public int id { get; set; }
-        public Nullable<int> category_id { get; set; }
-        public Nullable<int> brand_id { get; set; }
-        public string product_name { get; set; }
-        public string short_description { get; set; }
-        public string long_description { get; set; }
-        public decimal price { get; set; }
-        public Nullable<decimal> special_price { get; set; }
-        public int quantity { get; set; }
-        public Nullable<decimal> discount { get; set; }
-        public string image { get; set; }
-        public string status { get; set; }
-        public string created_by { get; set; }
-        public Nullable<System.DateTime> created_at { get; set; }
-        public Nullable<System.DateTime> updated_at { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Avatar { get; set; }
+        public Nullable<int> CategoryId { get; set; }
+        public string ShortDes { get; set; }
+        public string FullDescription { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public Nullable<decimal> PriceDiscount { get; set; }
+        public Nullable<int> TypeId { get; set; }
+        public string Slug { get; set; }
+        public Nullable<int> BrandId { get; set; }
+        public Nullable<bool> Deleted { get; set; }
+        public Nullable<bool> ShowOnHomePage { get; set; }
+        public Nullable<int> DisplayOrder { get; set; }
+        public Nullable<System.DateTime> CreatedOnUtc { get; set; }
+        public Nullable<System.DateTime> UpdatedOnUtc { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
