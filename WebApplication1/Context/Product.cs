@@ -11,7 +11,8 @@ namespace WebApplication1.Context
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -36,8 +37,17 @@ namespace WebApplication1.Context
         public Nullable<int> DisplayOrder { get; set; }
         public Nullable<System.DateTime> CreatedOnUtc { get; set; }
         public Nullable<System.DateTime> UpdatedOnUtc { get; set; }
+       
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        
+        public string ProductImage { get; internal set; }
+
+        [NotMapper]
+        public System.Web.HttpPostedFileBase ImageUpload { get; set; }
+
+        public virtual Brand Brand { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

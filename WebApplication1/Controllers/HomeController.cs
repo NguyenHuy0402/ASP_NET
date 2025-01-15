@@ -43,6 +43,7 @@ namespace WebApplication1.Controllers
                 {
                     _user.Password = GetMD5(_user.Password);
                     objweb_aspEntities.Configuration.ValidateOnSaveEnabled = false;
+                    _user.Id = objweb_aspEntities.Users.Max(u => u.Id) + 1;
                     objweb_aspEntities.Users.Add(_user);
                     objweb_aspEntities.SaveChanges();
                     return RedirectToAction("Index");
@@ -72,17 +73,37 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-
-
                 var f_password = GetMD5(password);
                 var data = objweb_aspEntities.Users.Where(s => s.Email.Equals(email) && s.Password.Equals(f_password)).ToList();
+
                 if (data.Count() > 0)
                 {
-                    //add session
-                    Session["FullName"] = data.FirstOrDefault().FirstName + " " + data.FirstOrDefault().LastName;
-                    Session["Email"] = data.FirstOrDefault().Email;
-                    Session["idUser"] = data.FirstOrDefault().Id;
-                    return RedirectToAction("Index");
+                    // Get the user data
+                    var user = data.FirstOrDefault();
+
+                    // Add session variables
+                    Session["FullName"] = user.LastName + " " + user.FirstName;
+                    Session["Email"] = user.Email;
+                    Session["idUser"] = user.Id;
+                    Session["IsAdmin"] = user.IsAdmin; // Store IsAdmin flag in session
+
+                    // Log session values for debugging
+                    System.Diagnostics.Debug.WriteLine("Session FullName: " + Session["FullName"]);
+                    System.Diagnostics.Debug.WriteLine("Session Email: " + Session["Email"]);
+                    System.Diagnostics.Debug.WriteLine("Session idUser: " + Session["idUser"]);
+                    System.Diagnostics.Debug.WriteLine("Session IsAdmin: " + Session["IsAdmin"]);
+
+                    // Redirect to appropriate page based on IsAdmin flag
+                    if (user.IsAdmin.HasValue && user.IsAdmin.Value)
+                    {
+                        // If user is an admin, redirect to Admin Dashboard
+                        return RedirectToAction("Home", "Admin");
+                    }
+                    else
+                    {
+                        // If user is not an admin, redirect to regular user home page
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
@@ -92,6 +113,7 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
+
 
         //Logout
         public ActionResult Logout()

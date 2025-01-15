@@ -23,5 +23,10 @@ namespace WebApplication1.Context
         public Nullable<bool> Deleted { get; set; }
         public Nullable<System.DateTime> CreatedOnUtc { get; set; }
         public Nullable<System.DateTime> UpdatedOnUtc { get; set; }
+
+        [NotMapper]
+        public System.Web.HttpPostedFileBase ImageUpload { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
